@@ -50,8 +50,9 @@ static const uint8_t SEG_PINS[8] = {7, 6, 5, 10, 11, 8, 3, 4};
 
 #define START_DIGIT         1
 
+#define PAGE_MS             4000
 #define LCD_ADDR            0x27
-#define DIGIT_COL           7    
+#define DIGIT_COL           8    
 #define DIGIT_ROW           0  
 
 #endif /* CONFIG_H */

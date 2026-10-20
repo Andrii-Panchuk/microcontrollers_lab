@@ -10,6 +10,9 @@ static unsigned long last_sensor_time = 0;
 
 static SensorData sensor_data;
 
+static uint32_t lastSwitch = 0;
+static bool showSensors = true;
+
 void setup() {
   sensors_init();
   lcd_init();
@@ -26,7 +29,14 @@ void loop() {
     algoritm_blink_led();
   }
 
-  lcd_show_main_text();
+  unsigned long now = millis();
+
+  if (now - lastSwitch >= PAGE_MS) {
+    lastSwitch = now;
+    showSensors = !showSensors;
+    if (showSensors) lcd_show_sensors(&sensor_data);
+    else             lcd_show_main_text();
+  }
 
   if (millis() - last_sensor_time >= SENSOR_INTERVAL_MS) {
     last_sensor_time = millis();
