@@ -5,6 +5,7 @@
 //#include "seven_segment.h"
 #include "lcd_display.h"
 #include "show_sensors_stats.h"
+#include "clock.h"
 
 static unsigned long last_sensor_time = 0;
 
@@ -19,6 +20,7 @@ void setup() {
   //seg_init();
   algoritm_peripherals_init();
   show_init();
+  clock_init();
 }
 
 void loop() {
@@ -43,6 +45,7 @@ void loop() {
 
     sensor_data = read_all_sensors();
     algoritm_servo(sensor_data.temperature);
+    clock_print_date_time();
     show_sensor_data(sensor_data);
   }
 }
